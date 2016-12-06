@@ -39,6 +39,7 @@
             android:name="com.example.abc.PasswordRecoverActivity"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
+        
     </application>
 
 </manifest>

@@ -107,10 +107,8 @@ public class PictureInputCellFragment extends BaseInputCellFragment {
 				Bitmap bmp = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
 				imageView.setImageBitmap(bmp);
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -118,7 +116,6 @@ public class PictureInputCellFragment extends BaseInputCellFragment {
 	
 	@Override
 	public void setHintText(String hintText) {
-		// TODO Auto-generated method stub
 		this.hintText.setHint(hintText);
 	}
 

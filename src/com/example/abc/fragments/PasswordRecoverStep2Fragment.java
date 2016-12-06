@@ -17,10 +17,12 @@ public class PasswordRecoverStep2Fragment extends Fragment{
 	SimpleTextInputCellFragment fragNewPasswordRepeat;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.fragment_password_recover_step2, null);
-		fragVerifyCode = (SimpleTextInputCellFragment) getFragmentManager().findFragmentById(R.id.input_verifycode);
-		fragNewPassword = (SimpleTextInputCellFragment) getFragmentManager().findFragmentById(R.id.input_newpassword);
-		fragNewPasswordRepeat = (SimpleTextInputCellFragment) getFragmentManager().findFragmentById(R.id.input_newpassword_repeat);
+		if(view == null) {
+			view = inflater.inflate(R.layout.fragment_password_recover_step2, null);
+			fragVerifyCode = (SimpleTextInputCellFragment) getFragmentManager().findFragmentById(R.id.input_verifycode);
+			fragNewPassword = (SimpleTextInputCellFragment) getFragmentManager().findFragmentById(R.id.input_newpassword);
+			fragNewPasswordRepeat = (SimpleTextInputCellFragment) getFragmentManager().findFragmentById(R.id.input_newpassword_repeat);
+		}
 		return view;
 	}
 	
