@@ -36,7 +36,7 @@
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
-            android:name="com.example.abc.FindPasswordActivity"
+            android:name="com.example.abc.PasswordRecoverActivity"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
     </application>

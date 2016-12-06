@@ -72,7 +72,7 @@ public class LoginActivity extends Activity {
 	}
 	
 	void goFindPassword() {
-		Intent itnt = new Intent(this, FindPasswordActivity.class);
+		Intent itnt = new Intent(this, PasswordRecoverActivity.class);
 		startActivity(itnt);
 		
 	}
