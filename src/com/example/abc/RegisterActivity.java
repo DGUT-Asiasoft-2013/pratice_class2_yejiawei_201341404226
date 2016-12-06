@@ -11,7 +11,9 @@ public class RegisterActivity extends Activity {
 
 	SimpleTextInputCellFragment fragInputCellAccount;
 	SimpleTextInputCellFragment fragInputCellPassword;
+	SimpleTextInputCellFragment	fragInputCellEmailAdress;
 	SimpleTextInputCellFragment fragInputCellPasswordRepeat;
+	
 	PictureInputCellFragment fragInputCellPicture;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +24,7 @@ public class RegisterActivity extends Activity {
 		fragInputCellPassword = (SimpleTextInputCellFragment) getFragmentManager().findFragmentById(R.id.input_password);
 		fragInputCellPasswordRepeat = (SimpleTextInputCellFragment) getFragmentManager().findFragmentById(R.id.input_password_repeat);
 		fragInputCellPicture = (PictureInputCellFragment) getFragmentManager().findFragmentById(R.id.input_picture);
+		fragInputCellEmailAdress = (SimpleTextInputCellFragment) getFragmentManager().findFragmentById(R.id.input_email);
 	}
 	
 	@Override
@@ -29,6 +32,8 @@ public class RegisterActivity extends Activity {
 		super.onResume();
 		fragInputCellAccount.setLabelText("用户名");
 		fragInputCellAccount.setHintText("请输入用户名");
+		fragInputCellEmailAdress.setLabelText("电子邮箱");
+		fragInputCellEmailAdress.setHintText("请输入电子邮箱");
 		fragInputCellPassword.setLabelText("密码");
 		fragInputCellPassword.setHintText("请输入密码");
 		fragInputCellPassword.setIsPassword(true);

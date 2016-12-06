@@ -13,7 +13,7 @@
         android:id="@+id/label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="用户名"
+        android:text="输入内容"
         android:textColor="@android:color/black"
         android:textSize="12sp" />
 
@@ -21,5 +21,5 @@
         android:id="@+id/edit"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="请输入用户名" />
+        android:hint="请输入内容" />
 </LinearLayout>
