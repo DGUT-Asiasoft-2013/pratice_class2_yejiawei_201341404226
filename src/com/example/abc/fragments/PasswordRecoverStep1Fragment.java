@@ -38,13 +38,20 @@ public class PasswordRecoverStep1Fragment extends Fragment{
 		fragEmail.setHintText("«Î ‰»Î◊¢≤·” œ‰");
 	}
 	
-	 void goNext() {
-		// TODO Auto-generated method stub
-//		Intent itnt = new Intent(this, )
-	}
-
 	public static interface OnGoNextListener{
 		void onGoNext();
 	}
+	
+	OnGoNextListener onGoNextListener;
+		
+		public void setOnGoNextListener(OnGoNextListener onGoNextListener) {
+			this.onGoNextListener = onGoNextListener;
+	}
+	void goNext(){
+		if(onGoNextListener!=null){
+			onGoNextListener.onGoNext();
+		}
+	}
+	
 	
 }

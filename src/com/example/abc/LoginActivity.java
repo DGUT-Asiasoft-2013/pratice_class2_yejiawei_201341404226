@@ -40,7 +40,7 @@ public class LoginActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				goFindPassword();
+				goRecoverPassword();
 			}
 		});
 		
@@ -71,7 +71,7 @@ public class LoginActivity extends Activity {
 		startActivity(itnt);
 	}
 	
-	void goFindPassword() {
+	void goRecoverPassword() {
 		Intent itnt = new Intent(this, PasswordRecoverActivity.class);
 		startActivity(itnt);
 		
