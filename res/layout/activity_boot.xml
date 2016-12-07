@@ -29,8 +29,8 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp" 
-        class="com.example.abc.fragments.VersionFragment"
-        tools:layout="@layout/fragment_verson"
+        class="com.example.abc.fragments.widgets.VersionFragment"
+        tools:layout="@layout/fragment_widget_verson"
         />
 
 </RelativeLayout>

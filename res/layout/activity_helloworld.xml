@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white" >
+     >
 
     <FrameLayout
         android:id="@+id/contain"
@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_gravity="bottom"
-        class="com.example.abc.fragments.MainTabbarFragment"
-        tools:layout="@layout/fragment_main_tabbar" />
+        class="com.example.abc.fragments.widgets.MainTabbarFragment"
+        tools:layout="@layout/fragment_widget_main_tabbar" />
 
 </FrameLayout>

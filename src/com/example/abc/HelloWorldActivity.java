@@ -1,11 +1,11 @@
 package com.example.abc;
 
-import com.example.abc.fragments.MainTabbarFragment;
-import com.example.abc.fragments.MainTabbarFragment.OnTabSelectedListener;
 import com.example.abc.fragments.pages.FeedsListFragment;
 import com.example.abc.fragments.pages.MyProfileFragment;
 import com.example.abc.fragments.pages.NotesListFragment;
 import com.example.abc.fragments.pages.SearchPageFragment;
+import com.example.abc.fragments.widgets.MainTabbarFragment;
+import com.example.abc.fragments.widgets.MainTabbarFragment.OnTabSelectedListener;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -18,10 +18,8 @@ public class HelloWorldActivity extends Activity {
 	SearchPageFragment contentSearchPage = new SearchPageFragment();
 
 	MainTabbarFragment tabbar;
-//	int index = 0;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_helloworld);
 
@@ -30,7 +28,7 @@ public class HelloWorldActivity extends Activity {
 
 			@Override
 			public void onTabSelected(int index) {
-				contentChange(index);
+				changeContent(index);
 			}
 		});
 	}
@@ -41,7 +39,7 @@ public class HelloWorldActivity extends Activity {
 		tabbar.setSelectedItem(0);
 	}
 
-	void contentChange(int index) {
+	void changeContent(int index) {
 		Fragment newFrag = new Fragment();
 		switch (index) {
 		case 0:
@@ -60,6 +58,7 @@ public class HelloWorldActivity extends Activity {
 			break;
 		}
 		
+		if(newFrag == null) { return; }
 		getFragmentManager().beginTransaction().replace(R.id.contain, newFrag).commit();
 	}
 }

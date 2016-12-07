@@ -1,4 +1,4 @@
-package com.example.abc.fragments;
+package com.example.abc.fragments.widgets;
 
 import com.example.abc.R;
 
@@ -16,7 +16,7 @@ public class MainTabbarFragment extends Fragment {
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_main_tabbar, null);
+		View view = inflater.inflate(R.layout.fragment_widget_main_tabbar, null);
 		
 		btnNew = view.findViewById(R.id.btn_new);
 		tabFeeds = view.findViewById(R.id.tab_feeds);
@@ -64,7 +64,6 @@ public class MainTabbarFragment extends Fragment {
 			if(otherTab == tab) {
 				otherTab.setSelected(true);
 				selectedIndex = i;
-				Log.d("selectedIndex", selectedIndex + "");
 			} else {
 				otherTab.setSelected(false);
 			}
@@ -75,10 +74,4 @@ public class MainTabbarFragment extends Fragment {
 		}
 	}
 	
-	
-//	void onTabClicked(View tab) {
-//		for(View otherTab : tabs) {
-//			otherTab.setSelected(otherTab == tab);
-//		}
-//	}
 }

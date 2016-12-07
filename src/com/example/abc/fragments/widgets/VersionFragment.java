@@ -1,4 +1,4 @@
-package com.example.abc.fragments;
+package com.example.abc.fragments.widgets;
 
 import com.example.abc.R;
 
@@ -16,7 +16,7 @@ public class VersionFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
-		View view = inflater.inflate(R.layout.fragment_verson, null);
+		View view = inflater.inflate(R.layout.fragment_widget_verson, null);
 		TextView textVersion = (TextView) view.findViewById(R.id.text);
 
 		PackageManager pkmg = this.getActivity().getPackageManager();

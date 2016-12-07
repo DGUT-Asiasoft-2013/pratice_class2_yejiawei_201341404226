@@ -20,17 +20,13 @@ public class BootActivity extends Activity {
 	
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
-//		Log.i("a", "sleep");
-//		SystemClock.sleep(1000);
-//		startLoginActivity();
+
 		Handler handler = new  Handler();
 		handler.postDelayed(new Runnable() {
 			
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
 				startLoginActivity();
 			}
 		}, 1000);
