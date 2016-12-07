@@ -1,12 +1,16 @@
 package com.example.abc.fragments.widgets;
 
+import com.example.abc.AddNewsActivity;
+import com.example.abc.HelloWorldActivity;
 import com.example.abc.R;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 public class MainTabbarFragment extends Fragment {
@@ -38,9 +42,23 @@ public class MainTabbarFragment extends Fragment {
 				}
 			});
 		}
+		
+		btnNew.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				goAddNews();
+			}
+		});
 		return view;
 	}
 
+	void goAddNews() {
+		Intent itnt = new Intent(getActivity(), AddNewsActivity.class);
+		
+		startActivity(itnt);
+	}
 	public static interface OnTabSelectedListener{
 		void onTabSelected(int index);
 	}

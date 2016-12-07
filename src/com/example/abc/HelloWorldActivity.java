@@ -29,6 +29,7 @@ public class HelloWorldActivity extends Activity {
 			@Override
 			public void onTabSelected(int index) {
 				changeContent(index);
+				
 			}
 		});
 	}
@@ -37,6 +38,7 @@ public class HelloWorldActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		tabbar.setSelectedItem(0);
+		
 	}
 
 	void changeContent(int index) {
@@ -60,5 +62,11 @@ public class HelloWorldActivity extends Activity {
 		
 		if(newFrag == null) { return; }
 		getFragmentManager().beginTransaction().replace(R.id.contain, newFrag).commit();
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		
 	}
 }
