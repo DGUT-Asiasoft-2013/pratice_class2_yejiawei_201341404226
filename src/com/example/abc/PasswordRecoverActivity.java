@@ -30,6 +30,10 @@ public class PasswordRecoverActivity extends Activity {
 		.commit();
 	}
 	
+	/**
+	 * 跳转到密码找回第二步页面
+	 * 添加页面切换动画效果
+	 */
 	void goStep2() {
 		
 		getFragmentManager()

@@ -21,7 +21,8 @@ public class AddNewsActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				overridePendingTransition(0, R.anim.slide_in_bottom);
+				finish();	
+				overridePendingTransition(R.anim.none, R.anim.slide_out_bottom);
 			}
 		});
 		fragAddNews = (SimpleTextInputCellFragment) getFragmentManager().findFragmentById(R.id.input_add);

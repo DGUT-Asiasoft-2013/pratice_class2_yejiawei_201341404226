@@ -5,10 +5,12 @@ import com.example.abc.fragments.pages.MyProfileFragment;
 import com.example.abc.fragments.pages.NotesListFragment;
 import com.example.abc.fragments.pages.SearchPageFragment;
 import com.example.abc.fragments.widgets.MainTabbarFragment;
+import com.example.abc.fragments.widgets.MainTabbarFragment.OnNewClickedListener;
 import com.example.abc.fragments.widgets.MainTabbarFragment.OnTabSelectedListener;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 
 public class HelloWorldActivity extends Activity {
@@ -29,10 +31,17 @@ public class HelloWorldActivity extends Activity {
 			@Override
 			public void onTabSelected(int index) {
 				changeContent(index);
-				
 			}
 		});
+		tabbar.setOnNewCkickedListener(new OnNewClickedListener() {
+
+			@Override
+			public void onNewClicked() {
+				bringUpEditor();
+			}});
 	}
+
+	
 
 	@Override
 	protected void onResume() {
@@ -41,6 +50,20 @@ public class HelloWorldActivity extends Activity {
 		
 	}
 
+	/**
+	 * 打开添加内容编辑界面
+	 */
+	protected void bringUpEditor() {
+		Intent itnt = new Intent(this, AddNewsActivity.class);
+		startActivity(itnt);
+		// 
+		overridePendingTransition(R.anim.slide_in_bottom, R.anim.none);
+	}
+	
+	/**
+	 * Tabbar切换界面
+	 * @param index
+	 */
 	void changeContent(int index) {
 		Fragment newFrag = new Fragment();
 		switch (index) {
@@ -64,9 +87,4 @@ public class HelloWorldActivity extends Activity {
 		getFragmentManager().beginTransaction().replace(R.id.contain, newFrag).commit();
 	}
 	
-	@Override
-	protected void onPause() {
-		super.onPause();
-		
-	}
 }

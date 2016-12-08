@@ -47,8 +47,7 @@ public class MainTabbarFragment extends Fragment {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				goAddNews();
+				onNewClicked();
 			}
 		});
 		return view;
@@ -89,6 +88,22 @@ public class MainTabbarFragment extends Fragment {
 		
 		if(onTabSelectedListener != null && selectedIndex >= 0) {
 			onTabSelectedListener.onTabSelected(selectedIndex);
+		}
+	}
+	
+	public static interface OnNewClickedListener{
+		void onNewClicked();
+	}
+	
+	OnNewClickedListener onNewClickedListener;
+	
+	public void setOnNewCkickedListener(OnNewClickedListener onNewClickedListener) {
+		this.onNewClickedListener = onNewClickedListener;
+	}
+	
+	void onNewClicked() {
+		if(onNewClickedListener != null) {
+			onNewClickedListener.onNewClicked();
 		}
 	}
 	
