@@ -55,7 +55,7 @@
                 class="com.example.abc.fragments.inputcells.SimpleTextInputCellFragment"
                 tools:layout="@layout/fragment_inputcell_simpletext" />
             <fragment
-                android:id="@+id/input_picture"
+                android:id="@+id/input_avatar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 class="com.example.abc.fragments.inputcells.PictureInputCellFragment"

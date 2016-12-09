@@ -1,5 +1,6 @@
 package com.example.abc.fragments.inputcells;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -12,6 +13,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
@@ -32,6 +34,7 @@ public class PictureInputCellFragment extends BaseInputCellFragment {
 	ImageView imageView;
 	TextView labelText;
 	TextView hintText;
+	byte[] pngData;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,7 +48,6 @@ public class PictureInputCellFragment extends BaseInputCellFragment {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				OnImageViewClicked();
 			}
 		});
@@ -59,7 +61,6 @@ public class PictureInputCellFragment extends BaseInputCellFragment {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						// TODO Auto-generated method stub
 						switch (which) {
 						case 0:
 							takePhoto();
@@ -90,7 +91,13 @@ public class PictureInputCellFragment extends BaseInputCellFragment {
 		Intent itnt = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		startActivityForResult(itnt, REQUESTCODE_CAMERA);
 	}
-
+	
+	void saveBitmap(Bitmap bmp) {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		bmp.compress(CompressFormat.PNG, 100, baos);
+		pngData = baos.toByteArray();
+	}
+	
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(resultCode == Activity.RESULT_CANCELED) return;
@@ -99,6 +106,7 @@ public class PictureInputCellFragment extends BaseInputCellFragment {
 //			Log.d("camera capture", data.getDataString());
 //			Toast.makeText(getActivity(), "aaa", Toast.LENGTH_SHORT);
 			Bitmap bmp = (Bitmap) data.getExtras().get("data");
+			saveBitmap(bmp);
 			imageView.setImageBitmap(bmp);
 		} else if (requestCode == REQUESTCODE_ALBUM) {
 //			Uri dataUri = data.getData();
@@ -106,6 +114,7 @@ public class PictureInputCellFragment extends BaseInputCellFragment {
 			try {
 				Bitmap bmp = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
 				imageView.setImageBitmap(bmp);
+				saveBitmap(bmp);
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -123,6 +132,10 @@ public class PictureInputCellFragment extends BaseInputCellFragment {
 	public void setLabelText(String labelText) {
 		// TODO Auto-generated method stub
 		this.labelText.setText(labelText);
+	}
+
+	public byte[] getPngData() {
+		return pngData;
 	}
 
 }

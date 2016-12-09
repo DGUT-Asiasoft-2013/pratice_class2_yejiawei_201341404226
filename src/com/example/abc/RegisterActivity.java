@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import com.example.abc.fragments.inputcells.PictureInputCellFragment;
 import com.example.abc.fragments.inputcells.SimpleTextInputCellFragment;
+import com.example.abc.security.MD5;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -16,6 +17,7 @@ import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -29,7 +31,7 @@ public class RegisterActivity extends Activity {
 	SimpleTextInputCellFragment	fragInputCellEmailAdress;
 	SimpleTextInputCellFragment fragInputCellPasswordRepeat;
 	SimpleTextInputCellFragment fragInputCellName;
-	PictureInputCellFragment fragInputCellPicture;
+	PictureInputCellFragment fragInputCellAvatar;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -38,7 +40,7 @@ public class RegisterActivity extends Activity {
 		fragInputCellAccount = (SimpleTextInputCellFragment) getFragmentManager().findFragmentById(R.id.input_account);
 		fragInputCellPassword = (SimpleTextInputCellFragment) getFragmentManager().findFragmentById(R.id.input_password);
 		fragInputCellPasswordRepeat = (SimpleTextInputCellFragment) getFragmentManager().findFragmentById(R.id.input_password_repeat);
-		fragInputCellPicture = (PictureInputCellFragment) getFragmentManager().findFragmentById(R.id.input_picture);
+		fragInputCellAvatar = (PictureInputCellFragment) getFragmentManager().findFragmentById(R.id.input_avatar);
 		fragInputCellEmailAdress = (SimpleTextInputCellFragment) getFragmentManager().findFragmentById(R.id.input_email);
 		fragInputCellName = (SimpleTextInputCellFragment) getFragmentManager().findFragmentById(R.id.input_name);
 	
@@ -66,17 +68,22 @@ public class RegisterActivity extends Activity {
 		fragInputCellPasswordRepeat.setIsPassword(true);
 		fragInputCellName.setLabelText("Í«≥∆");
 		fragInputCellName.setHintText("«Î ‰»ÎÍ«≥∆");
-		fragInputCellPicture.setLabelText("—°‘ÒÕº∆¨");
-		fragInputCellPicture.setHintText("«Î ‰»ÎÕº∆¨");
+		fragInputCellAvatar.setLabelText("—°‘ÒÕº∆¨");
+		fragInputCellAvatar.setHintText("«Î ‰»ÎÕº∆¨");
 	}
 	
 	void submit() {
 		String password = fragInputCellPassword.getText();
 		String passwordRepeat = fragInputCellPasswordRepeat.getText();
 		if(!password.equals(passwordRepeat)) {
-			
+			new AlertDialog.Builder(RegisterActivity.this)
+			.setMessage("¡Ω¥Œ√‹¬Î≤ª“ª÷¬")
+			.setNegativeButton("OK", null)
+			.show();
 			return;
 		}
+		
+		password = MD5.getMD5(password);
 		String account = fragInputCellAccount.getText();
 		String email = fragInputCellEmailAdress.getText();
 		String name = fragInputCellName.getText();
@@ -84,16 +91,21 @@ public class RegisterActivity extends Activity {
 		
 		OkHttpClient client = new OkHttpClient();
 		
-		MultipartBody.Builder requestBody = new MultipartBody.Builder()
+		MultipartBody.Builder requestBodyBuilder = new MultipartBody.Builder()
 				.addFormDataPart("account", account)
 				.addFormDataPart("name", name)
 				.addFormDataPart("email", email)
 				.addFormDataPart("passwordHash", password);
 				
 		
+		if(fragInputCellAvatar.getPngData() != null) {
+			requestBodyBuilder.addFormDataPart("avatar", "avatar", RequestBody
+					.create(MediaType.parse("image/png"), fragInputCellAvatar.getPngData()));
+		}
+		
 		Request request = new Request.Builder()
 				.url("http://172.27.0.45:8080/membercenter/api/register")
-				.method("post", null).post(requestBody.build())
+				.method("post", null).post(requestBodyBuilder.build())
 				.build();
 		
 		final ProgressDialog progressDialog = new ProgressDialog(RegisterActivity.this);
