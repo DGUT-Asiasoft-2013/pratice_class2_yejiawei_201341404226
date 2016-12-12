@@ -45,7 +45,7 @@
              >
         </activity>
         <activity
-            android:name="com.example.abc.AddNewsActivity"
+            android:name="com.example.abc.AddNewArticleActivity"
              >
         </activity>
     </application>

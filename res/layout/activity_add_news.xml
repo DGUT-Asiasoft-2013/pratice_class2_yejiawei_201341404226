@@ -16,23 +16,34 @@
             class="com.example.abc.fragments.inputcells.SimpleTextInputCellFragment"
             tools:layout="@layout/fragment_inputcell_simpletext" />
 
-        <EditText
-            android:gravity="top"
-            android:id="@+id/editText1"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:ems="10"
-            android:inputType="textMultiLine" >
-
-            <requestFocus />
-        </EditText>
-        
-        <Button
-            android:id="@+id/btn_send"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="SUBMIT" />
-        
+            android:orientation="vertical"
+            android:padding="8dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="文章内容 " />
+
+            <EditText
+                android:id="@+id/input_main_text"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:ems="10"
+                android:gravity="top"
+                android:inputType="textMultiLine" >
+
+                <requestFocus />
+            </EditText>
+
+            <Button
+                android:id="@+id/btn_send"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SUBMIT" />
+        </LinearLayout>
     </LinearLayout>
 
 </FrameLayout>

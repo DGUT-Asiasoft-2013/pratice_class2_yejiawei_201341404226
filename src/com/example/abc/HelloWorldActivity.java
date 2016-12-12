@@ -54,7 +54,7 @@ public class HelloWorldActivity extends Activity {
 	 * 打开添加内容编辑界面
 	 */
 	protected void bringUpEditor() {
-		Intent itnt = new Intent(this, AddNewsActivity.class);
+		Intent itnt = new Intent(this, AddNewArticleActivity.class);
 		startActivity(itnt);
 		// 
 		overridePendingTransition(R.anim.slide_in_bottom, R.anim.none);

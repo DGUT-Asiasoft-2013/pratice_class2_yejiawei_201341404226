@@ -1,6 +1,6 @@
 package com.example.abc.fragments.widgets;
 
-import com.example.abc.AddNewsActivity;
+import com.example.abc.AddNewArticleActivity;
 import com.example.abc.HelloWorldActivity;
 import com.example.abc.R;
 
@@ -54,7 +54,7 @@ public class MainTabbarFragment extends Fragment {
 	}
 
 	void goAddNews() {
-		Intent itnt = new Intent(getActivity(), AddNewsActivity.class);
+		Intent itnt = new Intent(getActivity(), AddNewArticleActivity.class);
 		
 		startActivity(itnt);
 	}

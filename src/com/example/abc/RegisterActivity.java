@@ -106,8 +106,6 @@ public class RegisterActivity extends Activity {
 		}
 		
 		Request request = Server.requestBuilderWithApi("register")
-//				new Request.Builder()
-//				.url("http://172.27.0.5:8080/membercenter/api/register")
 				.method("post", null).post(requestBodyBuilder.build())
 				.build();
 		
