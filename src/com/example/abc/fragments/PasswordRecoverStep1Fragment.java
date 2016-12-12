@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 public class PasswordRecoverStep1Fragment extends Fragment{
 	View view;
 	SimpleTextInputCellFragment fragEmail;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		if(view == null) {
@@ -49,6 +50,11 @@ public class PasswordRecoverStep1Fragment extends Fragment{
 		public void setOnGoNextListener(OnGoNextListener onGoNextListener) {
 			this.onGoNextListener = onGoNextListener;
 	}
+		
+	public String getText() {
+		return fragEmail.getText();
+	}
+		
 	void goNext(){
 		if(onGoNextListener!=null){
 			onGoNextListener.onGoNext();

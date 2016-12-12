@@ -2,6 +2,7 @@ package com.example.abc;
 
 import java.io.IOException;
 
+import com.example.abc.api.Server;
 import com.example.abc.fragments.inputcells.PictureInputCellFragment;
 import com.example.abc.fragments.inputcells.SimpleTextInputCellFragment;
 import com.example.abc.security.MD5;
@@ -89,7 +90,8 @@ public class RegisterActivity extends Activity {
 		String name = fragInputCellName.getText();
 	
 		
-		OkHttpClient client = new OkHttpClient();
+		OkHttpClient client = Server.getSharedClient(); 
+//				new OkHttpClient();
 		
 		MultipartBody.Builder requestBodyBuilder = new MultipartBody.Builder()
 				.addFormDataPart("account", account)
@@ -103,8 +105,9 @@ public class RegisterActivity extends Activity {
 					.create(MediaType.parse("image/png"), fragInputCellAvatar.getPngData()));
 		}
 		
-		Request request = new Request.Builder()
-				.url("http://172.27.0.45:8080/membercenter/api/register")
+		Request request = Server.requestBuilderWithApi("register")
+//				new Request.Builder()
+//				.url("http://172.27.0.5:8080/membercenter/api/register")
 				.method("post", null).post(requestBodyBuilder.build())
 				.build();
 		
