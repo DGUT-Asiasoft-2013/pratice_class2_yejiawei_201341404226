@@ -20,6 +20,7 @@ public class HelloWorldActivity extends Activity {
 	SearchPageFragment contentSearchPage = new SearchPageFragment();
 
 	MainTabbarFragment tabbar;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -38,16 +39,17 @@ public class HelloWorldActivity extends Activity {
 			@Override
 			public void onNewClicked() {
 				bringUpEditor();
-			}});
+			}
+		});
 	}
-
-	
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		tabbar.setSelectedItem(0);
-		
+		if (tabbar.getSelectedIndex() < 0) {
+			tabbar.setSelectedItem(0);
+		}
+
 	}
 
 	/**
@@ -56,12 +58,13 @@ public class HelloWorldActivity extends Activity {
 	protected void bringUpEditor() {
 		Intent itnt = new Intent(this, AddNewArticleActivity.class);
 		startActivity(itnt);
-		// 
+		//
 		overridePendingTransition(R.anim.slide_in_bottom, R.anim.none);
 	}
-	
+
 	/**
 	 * TabbarÇÐ»»½çÃæ
+	 * 
 	 * @param index
 	 */
 	void changeContent(int index) {
@@ -82,9 +85,11 @@ public class HelloWorldActivity extends Activity {
 		default:
 			break;
 		}
-		
-		if(newFrag == null) { return; }
+
+		if (newFrag == null) {
+			return;
+		}
 		getFragmentManager().beginTransaction().replace(R.id.contain, newFrag).commit();
 	}
-	
+
 }
