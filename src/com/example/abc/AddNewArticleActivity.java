@@ -6,12 +6,13 @@ import com.example.abc.api.Server;
 import com.example.abc.fragments.inputcells.SimpleTextInputCellFragment;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.SlidingDrawer;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MultipartBody;
@@ -30,7 +31,7 @@ public class AddNewArticleActivity extends Activity {
 		setContentView(R.layout.activity_add_news);
 		input_main_text = (EditText) findViewById(R.id.input_main_text);
 		btn_send = (Button) findViewById(R.id.btn_send);
-		btn_send.setOnClickListener(new OnClickListener() {
+		btn_send.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -68,6 +69,11 @@ public class AddNewArticleActivity extends Activity {
 			public void onResponse(final Call arg0, final Response arg1) throws IOException {
 				runOnUiThread(new Runnable() {
 					public void run() {
+						try {
+							AddNewArticleActivity.this.onResponse(arg0, arg1.body().string());
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
 					}
 				});
 			}
@@ -80,6 +86,22 @@ public class AddNewArticleActivity extends Activity {
 				});
 			}
 		});
-
+	}
+	
+	void onResponse(Call arg0, String responseBody) {
+		new AlertDialog.Builder(this)
+		.setTitle("发布成功")
+		.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				finish();
+			}
+		})
+		.show();
+	}
+	
+	void onFailure(Call arg0, Exception arg1) {
+		
 	}
 }

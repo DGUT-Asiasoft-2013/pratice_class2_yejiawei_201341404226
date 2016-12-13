@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal" >
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" 
+    android:padding="8dp">
 
-    <View
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray" 
-        android:layout_gravity="left"/>
+    
 
     <FrameLayout
         android:layout_width="60dp"
         android:layout_height="60dp" >
 
-        <ImageView
-            android:id="@+id/img_user"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:background="@drawable/ic_launcher" />
+        <com.example.abc.fragments.widgets.AvatarView
+            android:id="@+id/avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
     </FrameLayout>
 
     <RelativeLayout
@@ -30,7 +26,8 @@
             android:id="@+id/tv_text"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:gravity="center"
+            android:gravity="left"
+            android:paddingLeft="8dp"
             android:text="aaa" />
 
         <TextView
@@ -43,9 +40,5 @@
             android:text="date" />
     </RelativeLayout>
     
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_gravity="bottom"
-            android:background="@android:color/darker_gray" />
+       
 </LinearLayout>

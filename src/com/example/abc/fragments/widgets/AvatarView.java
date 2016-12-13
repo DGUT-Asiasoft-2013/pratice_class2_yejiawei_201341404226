@@ -10,6 +10,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Shader.TileMode;
 import android.os.Handler;
@@ -37,24 +39,36 @@ public class AvatarView extends View{
 	}
 	
 	Paint paint;
-	float radius;
+	float srcWidth, srcHeight;
 	Handler mainThreadHandler = new Handler();
 	
 	public void setBitmap(Bitmap bmp) {
-		if(bmp == null) { return; }
-		paint = new Paint();
-		paint.setShader(new BitmapShader(bmp, TileMode.REPEAT, TileMode.REPEAT));
-		radius = (Math.min(bmp.getWidth(), bmp.getHeight()))/2;
-		Log.d("radius", radius + "");
+		if(bmp==null) {
+			paint = new Paint();
+			paint.setColor(Color.GRAY);
+			paint.setStyle(Paint.Style.STROKE);
+			paint.setStrokeWidth(1);
+		    paint.setPathEffect(new DashPathEffect(new float[]{5, 10, 15, 20}, 0));
+			paint.setAntiAlias(true);
+		}else{
+			paint = new Paint();
+			paint.setShader(new BitmapShader(bmp, TileMode.REPEAT, TileMode.REPEAT));
+			paint.setAntiAlias(true);
+			
+			srcWidth = bmp.getWidth();
+			srcHeight = bmp.getHeight();	
+		}
+//		radius = (Math.min(bmp.getWidth(), bmp.getHeight()))/2;
+//		Log.d("radius", radius + "");
 		invalidate();
 	}
 	
-	public void load(User user) {
-		
+	public void load(String url) {
+
 		OkHttpClient client = new OkHttpClient();
 		
 		Request request = new Request.Builder()
-				.url(Server.serverAdress + user.getAvatar())
+				.url(url)
 				.method("get", null)
 				.build();
 		
@@ -65,6 +79,8 @@ public class AvatarView extends View{
 				byte[] bytes = arg1.body().bytes();
 				
 				final Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+				Bitmap.createScaledBitmap(bmp, bmp.getWidth()/2, bmp.getHeight()/2, false);
+				bmp.recycle();
 				mainThreadHandler.post(new Runnable() {
 					
 					@Override
@@ -76,17 +92,31 @@ public class AvatarView extends View{
 			
 			@Override
 			public void onFailure(Call arg0, IOException arg1) {
-				// TODO Auto-generated method stub
 				
 			}
 		});
 	}
 	
+	public void load(User user) {
+		load(Server.serverAdress + user.getAvatar());
+	}
 	@Override
 	public void draw(Canvas canvas) {
 		super.draw(canvas);
-		if(paint != null) {
-			canvas.drawCircle(getWidth()/2, getHeight()/2, radius, paint);
+		if(paint!=null){
+			canvas.save();
+			
+			float dstWidth = getWidth();
+			float dstHeight = getHeight();
+			
+			float scaleX = srcWidth / dstWidth;
+			float scaleY = srcHeight / dstHeight;
+
+			canvas.scale(1/scaleX, 1/scaleY);
+
+			canvas.drawCircle(srcWidth/2, srcHeight/2, Math.min(srcWidth, srcHeight)/2, paint);
+			
+			canvas.restore();
 		}
 	}
 	
