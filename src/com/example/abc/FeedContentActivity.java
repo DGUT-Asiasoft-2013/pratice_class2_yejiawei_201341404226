@@ -10,6 +10,7 @@ import com.example.abc.api.Server;
 import com.example.abc.api.entity.Article;
 import com.example.abc.api.entity.Comment;
 import com.example.abc.api.entity.Page;
+import com.example.abc.fragments.widgets.AvatarView;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -26,6 +27,7 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import okhttp3.Call;
@@ -58,7 +60,7 @@ public class FeedContentActivity extends Activity{
 		article = (Article) getIntent().getSerializableExtra("article");
 //		final int articleId = (Integer) getIntent().getSerializableExtra("articleId");
 		((TextView)findViewById(R.id.feed_text)).setText(article.getText());
-		
+		((TextView)findViewById(R.id.feed_title)).setText(article.getTitle());
 		commentList.setAdapter(listAdapter);
 		findViewById(R.id.btn_comment).setOnClickListener(new OnClickListener() {
 			
@@ -196,13 +198,14 @@ public class FeedContentActivity extends Activity{
 			} else {
 				view = convertView;
 			}
-			
+			AvatarView authorAvatar = (AvatarView) view.findViewById(R.id.avatar);
 			TextView commentText = (TextView) view.findViewById(R.id.comment_text);
 			TextView commentAuthor = (TextView) view.findViewById(R.id.comment_author);
 			TextView date = (TextView) view.findViewById(R.id.comment_date);
 			Comment comment = dataList.get(position);
 			commentText.setText(comment.getText());
 			commentAuthor.setText(comment.getAuthorName());
+			authorAvatar.load(Server.serverAdress + comment.getAuthorAvatar());
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyƒÍMM‘¬dd»’");
 			date.setText(dateFormat.format(article.getCreateDate()));
 			
