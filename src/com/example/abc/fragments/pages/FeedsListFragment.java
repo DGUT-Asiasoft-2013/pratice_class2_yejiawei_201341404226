@@ -134,7 +134,7 @@ public class FeedsListFragment extends Fragment {
 		btnLoadMore.setEnabled(false);
 		textLoadMore.setText("Мгдижа...");
 		
-		Request request = Server.requestBuilderWithApi("feeds/" + page+1).get().build();
+		Request request = Server.requestBuilderWithApi("feeds/" + (page+1)).get().build();
 		Server.getSharedClient().newCall(request).enqueue(new Callback() {
 			
 			@Override
@@ -225,9 +225,14 @@ public class FeedsListFragment extends Fragment {
 	};
 	
 	void onItemClicked (int position) {
-		String text = dataList.get(position).getText();
+//		String text = dataList.get(position).getText();
+		Article article = dataList.get(position);
 		Intent itnt = new Intent(getActivity(),FeedContentActivity.class);
-		itnt.putExtra("text", text);
+//		itnt.putExtra("text", text);
+//		itnt.putExtra("articleId", article.getId());
+//		itnt.putExtra("article", article);
+		itnt.putExtra("article", article);
+		
 		
 		startActivity(itnt);
 	}

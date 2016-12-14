@@ -3,15 +3,14 @@ package com.example.abc;
 import java.io.IOException;
 
 import com.example.abc.api.Server;
-import com.example.abc.fragments.inputcells.SimpleTextInputCellFragment;
+import com.example.abc.api.entity.Article;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.view.View.OnClickListener;
 import android.widget.EditText;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -20,46 +19,35 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class AddNewArticleActivity extends Activity {
-	SimpleTextInputCellFragment fragAddNewArticle = new SimpleTextInputCellFragment();
-	Button btn_send;
-	EditText input_main_text;
-	
+public class AddNewCommentActivity extends Activity{
+	EditText text;
+	String articleId;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_add_news);
-		input_main_text = (EditText) findViewById(R.id.input_main_text);
-		btn_send = (Button) findViewById(R.id.btn_send);
-		btn_send.setOnClickListener(new View.OnClickListener() {
-
+		setContentView(R.layout.activity_add_comment);
+		Article article = (Article) getIntent().getSerializableExtra("article");
+		text = (EditText) findViewById(R.id.comment_text);
+		articleId = article.getId();
+		findViewById(R.id.submit).setOnClickListener(new OnClickListener() {
+			
 			@Override
 			public void onClick(View v) {
 				submit();
-//				finish();
-				overridePendingTransition(R.anim.none, R.anim.slide_out_bottom);
 			}
 		});
-		fragAddNewArticle = (SimpleTextInputCellFragment) getFragmentManager().findFragmentById(R.id.input_add);
 	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		fragAddNewArticle.setLabelText("标题");
-		fragAddNewArticle.setHintText("请输入要标题");
-
-	}
-
+	
 	void submit() {
-		String title = fragAddNewArticle.getText();
-		String text = input_main_text.getText().toString();
+		
+//		String text = input_main_text.getText().toString();
 		OkHttpClient client = Server.getSharedClient();
+		// new OkHttpClient();
 
-		MultipartBody.Builder requestBodyBuilder = new MultipartBody.Builder().addFormDataPart("title", title)
-				.addFormDataPart("text", text);
+		MultipartBody.Builder requestBodyBuilder = new MultipartBody.Builder()
+				.addFormDataPart("text", text.getText().toString());
 
-		Request request = Server.requestBuilderWithApi("article").method("post", null).post(requestBodyBuilder.build())
+		Request request = Server.requestBuilderWithApi("article/" +articleId + "/comments").method("post", null).post(requestBodyBuilder.build())
 				.build();
 
 		client.newCall(request).enqueue(new Callback() {
@@ -69,7 +57,7 @@ public class AddNewArticleActivity extends Activity {
 				runOnUiThread(new Runnable() {
 					public void run() {
 						try {
-							AddNewArticleActivity.this.onResponse(arg0, arg1.body().string());
+							AddNewCommentActivity.this.onResponse(arg0, arg1.body().string());
 						} catch (IOException e) {
 							e.printStackTrace();
 						}

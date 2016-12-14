@@ -48,6 +48,10 @@
             android:name="com.example.abc.AddNewArticleActivity"
              >
         </activity>
+        <activity
+            android:name="com.example.abc.AddNewCommentActivity"
+             >
+        </activity>
     </application>
 
 </manifest>

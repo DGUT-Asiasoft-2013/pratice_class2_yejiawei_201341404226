@@ -1,8 +1,10 @@
 package com.example.abc.api.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Article {
+
+public class Article implements Serializable{
 	String id;
 	String title;
 	String text;
@@ -52,6 +54,4 @@ public class Article {
 	public void setAuthorAvatar(String authorAvatar) {
 		this.authorAvatar = authorAvatar;
 	}
-	
-	
 }

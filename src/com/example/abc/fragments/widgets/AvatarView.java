@@ -79,8 +79,8 @@ public class AvatarView extends View{
 				byte[] bytes = arg1.body().bytes();
 				
 				final Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-				Bitmap.createScaledBitmap(bmp, bmp.getWidth()/2, bmp.getHeight()/2, false);
-				bmp.recycle();
+//				Bitmap.createScaledBitmap(bmp, bmp.getWidth()/2, bmp.getHeight()/2, false);
+//				bmp.recycle();
 				mainThreadHandler.post(new Runnable() {
 					
 					@Override
