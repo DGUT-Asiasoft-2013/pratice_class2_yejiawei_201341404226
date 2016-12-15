@@ -119,8 +119,8 @@ public class FeedContentActivity extends Activity{
 					}
 				});
 				try {
-					final Page<Comment> comment= new ObjectMapper().readValue(arg1.body().string(), new TypeReference<Page<Comment>>(){});
-					if(comment.getNumber() > page) {
+					final Page<Comment> data= new ObjectMapper().readValue(arg1.body().string(), new TypeReference<Page<Comment>>(){});
+					if(data.getNumber() > page) {
 						
 						
 						runOnUiThread(new Runnable() {
@@ -128,11 +128,11 @@ public class FeedContentActivity extends Activity{
 							@Override
 							public void run() {
 								if(dataList == null) {
-									dataList = comment.getContent();
+									dataList = data.getContent();
 								} else {
-									dataList.addAll(comment.getContent());
+									dataList.addAll(data.getContent());
 								}
-								page = comment.getNumber();
+								page = data.getNumber();
 								listAdapter.notifyDataSetChanged();
 							}
 						});
@@ -168,7 +168,6 @@ public class FeedContentActivity extends Activity{
 					public void run() {
 						FeedContentActivity.this.page = data.getNumber();
 						FeedContentActivity.this.dataList = data.getContent();
-						Log.d("dataSize", dataList.size() + "");
 						listAdapter.notifyDataSetInvalidated();
 					}
 				});
@@ -207,7 +206,7 @@ public class FeedContentActivity extends Activity{
 			commentAuthor.setText(comment.getAuthorName());
 			authorAvatar.load(Server.serverAdress + comment.getAuthorAvatar());
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyƒÍMM‘¬dd»’");
-			date.setText(dateFormat.format(article.getCreateDate()));
+			date.setText(dateFormat.format(comment.getCreateDate()));
 			
 			return view;
 		}

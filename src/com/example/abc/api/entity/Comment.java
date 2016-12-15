@@ -9,10 +9,18 @@ public class Comment {
 	String text;
 	String authorName;
 	String authorAvatar;
+	String articleTitle;
 //	Article articele;
+	
 	
 	public String getId() {
 		return id;
+	}
+	public String getArticleTitle() {
+		return articleTitle;
+	}
+	public void setArticleTitle(String articleTitle) {
+		this.articleTitle = articleTitle;
 	}
 	public String getAuthorName() {
 		return authorName;

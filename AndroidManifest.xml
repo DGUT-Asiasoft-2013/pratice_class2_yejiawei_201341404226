@@ -53,6 +53,10 @@
             android:name="com.example.abc.AddNewCommentActivity"
              >
         </activity>
+        <activity
+            android:name="com.example.abc.ChangePasswordActivity"
+             >
+        </activity>
     </application>
 
 </manifest>

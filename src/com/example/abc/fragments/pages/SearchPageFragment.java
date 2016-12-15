@@ -162,7 +162,7 @@ public class SearchPageFragment extends Fragment {
 		textLoadMore.setText("Мгдижа...");
 		
 		Request request = Server
-				.requestBuilderWithApi("article/s/" + keyword + "/?page=" + (page+1))
+				.requestBuilderWithApi("article/s/" + keyword + "?page=" + (page+1))
 				.get()
 				.build();
 		

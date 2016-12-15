@@ -89,10 +89,6 @@ public class RegisterActivity extends Activity {
 		String email = fragInputCellEmailAdress.getText();
 		String name = fragInputCellName.getText();
 	
-		
-		OkHttpClient client = Server.getSharedClient(); 
-//				new OkHttpClient();
-		
 		MultipartBody.Builder requestBodyBuilder = new MultipartBody.Builder()
 				.addFormDataPart("account", account)
 				.addFormDataPart("name", name)
@@ -115,7 +111,7 @@ public class RegisterActivity extends Activity {
 		progressDialog.setCanceledOnTouchOutside(false);
 		progressDialog.show();
 		
-		client.newCall(request).enqueue(new Callback() {
+		Server.getSharedClient().newCall(request).enqueue(new Callback() {
 			
 			@Override
 			public void onResponse(final Call arg0, final Response arg1) throws IOException {

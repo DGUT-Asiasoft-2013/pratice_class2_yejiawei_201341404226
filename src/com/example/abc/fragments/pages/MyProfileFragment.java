@@ -2,6 +2,7 @@ package com.example.abc.fragments.pages;
 
 import java.io.IOException;
 
+import com.example.abc.ChangePasswordActivity;
 import com.example.abc.R;
 import com.example.abc.api.Server;
 import com.example.abc.api.entity.User;
@@ -9,10 +10,12 @@ import com.example.abc.fragments.widgets.AvatarView;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -35,6 +38,15 @@ public class MyProfileFragment extends Fragment {
 			progressBar = (ProgressBar) view.findViewById(R.id.progress);
 			avatar = (AvatarView) view.findViewById(R.id.avatar);
 		}
+		
+		view.findViewById(R.id.btn_changePassword).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent itnt = new Intent(getActivity(), ChangePasswordActivity.class);
+				startActivity(itnt);
+			}
+		});
 		return view;
 	}
 	
@@ -47,7 +59,6 @@ public class MyProfileFragment extends Fragment {
 		Request request = Server.requestBuilderWithApi("me")
 				.method("get", null)
 				.build();
-		
 		client.newCall(request).enqueue(new Callback() {
 			
 			@Override
