@@ -34,6 +34,7 @@
         </activity>
         <activity
             android:name="com.example.abc.HelloWorldActivity"
+            android:windowSoftInputMode="adjustPan"
             >
         </activity>
         <activity
